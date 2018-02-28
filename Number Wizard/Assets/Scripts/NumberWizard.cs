@@ -2,12 +2,22 @@
 using System.Collections;
 
 public class NumberWizard : MonoBehaviour {
-	int max = 1000;
-	int min = 1;
-	int guess = 500;
-	
+	 int max;
+	 int min;
+	 int guess;
+	 
 	// Use this for initialization
 	void Start () {
+		StartGame ();
+	}
+	
+	//Introduce game
+	void StartGame (){
+		max = 1000;
+		min = 1;
+		guess = 500;
+		
+		print ("========================");
 		print ("Welcome to Number Wizard");
 		print ("Pick a number in your head, but don't tell me!");
 		print ("The highest number you can pick is " + max);
@@ -16,22 +26,27 @@ public class NumberWizard : MonoBehaviour {
 		print ("Up arrow = higher, down = lower, and enter = equal");
 		max = max + 1;
 	}
-
 	// Update is called once per frame
 	void Update () {
 		if (Input.GetKeyDown(KeyCode.UpArrow)){
 			print ("Up arrow pressed");
 			min = guess;
-			guess = (max + min) / 2; //Set guess halfway between max and min/Binary Search
-			print ("Higher or lower than " + guess);
+			NextGuess ();
 		} else if (Input.GetKeyDown(KeyCode.DownArrow)){
 			print ("Down arrow pressed");
 			max = guess;
-			guess = (max + min) / 2; //Set guess halfway between max and min/Binary Search
-			print ("Higher or lower than " + guess);
+			NextGuess ();
 		} else if(Input.GetKeyDown(KeyCode.Return)){
-			print ("Enter pressed.");
+			print ("I won!");
+			StartGame();
 		}
+	}
+	
+	//Calculate next guess and ask user for input
+	void NextGuess(){
+		guess = (max + min) / 2; //Set guess halfway between max and min/Binary Search
+		print ("Higher or lower than " + guess);
+		print ("Up arrow = higher, down = lower, and enter = equal");
 	}
 	
 }
